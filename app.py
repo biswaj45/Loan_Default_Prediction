@@ -1,0 +1,34 @@
+import pickle
+from flask import Flask, render_template, app, request, url_for, jsonify
+import numpy as np
+import pandas as pd
+
+app = Flask(__name__)
+catboost_model = pickle.load(open('catboost_model_version_1.pkl', 'rb'))
+scalar = pickle.load(open('data_scaling_latest.pkl', 'rb'))
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/predict_api', methods=['POST'])
+
+
+def predict_api():
+    data = request.json['data']
+    print(data)
+    #print(np.array(list(data.values())).reshape(1, -1))
+    #new_tran_data = scalar.fit_transform(np.array(list(data.values())).reshape(1, -1))
+    df = pd.DataFrame([data])
+    new_tran_data = scalar.transform(df)
+    output = catboost_model.predict(new_tran_data)
+    print(output[0])
+    if output[0] == 1:
+        prediction = 'Y'
+    else:
+        prediction = 'N'
+    return prediction
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

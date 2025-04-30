@@ -9,4 +9,5 @@ xgboost
 lightgbm
 imbalanced-learn
 joblib
+Flask
 -e .
