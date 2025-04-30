@@ -10,4 +10,8 @@ lightgbm
 imbalanced-learn
 joblib
 Flask
+pydantic
+fastapi
+typing-extensions
+fastapi[all]
 -e .

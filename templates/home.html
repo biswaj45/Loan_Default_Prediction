@@ -1,3 +1,37 @@
-<h1>    
-Welcome to the Home Page
-</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan Application</title>
+</head>
+<body>
+    <h2>Loan Application Form</h2>
+    <form action="/submit" method="post">
+        <label>Client Income: <input type="number" name="Client_Income" step="0.01" required></label><br>
+        
+        <label>Car Owned:
+            <select name="Car_Owned">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </label><br>
+
+        <label>Bike Owned:
+            <select name="Bike_Owned">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </label><br>
+
+        <label>Client Gender:
+            <select name="Client_Gender">
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+        </label><br>
+
+        <!-- Add more fields similarly -->
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -2,10 +2,12 @@ import pickle
 from flask import Flask, render_template, app, request, url_for, jsonify
 import numpy as np
 import pandas as pd
+from data_preprocessing import FullLoanPreprocessor
 
 app = Flask(__name__)
 catboost_model = pickle.load(open('catboost_model_version_1.pkl', 'rb'))
 scalar = pickle.load(open('data_scaling_latest.pkl', 'rb'))
+preprocessor = pickle.load(open('data_preprocessing.pkl', 'rb'))
 
 @app.route('/')
 def home():
@@ -20,14 +22,15 @@ def predict_api():
     #print(np.array(list(data.values())).reshape(1, -1))
     #new_tran_data = scalar.fit_transform(np.array(list(data.values())).reshape(1, -1))
     df = pd.DataFrame([data])
-    new_tran_data = scalar.transform(df)
+    processed_data = preprocessor.transform(df)
+    new_tran_data = scalar.transform(processed_data)
     output = catboost_model.predict(new_tran_data)
     print(output[0])
     if output[0] == 1:
         prediction = 'Y'
     else:
         prediction = 'N'
-    return prediction
+    return jsonify(prediction)
 
 
 if __name__ == '__main__':
