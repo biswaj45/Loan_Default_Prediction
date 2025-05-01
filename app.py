@@ -171,9 +171,8 @@
 
 import pickle
 from flask import Flask, render_template, request, jsonify
-import numpy as np
+#import numpy as np
 import pandas as pd
-from data_preprocessing import FullLoanPreprocessor
 from data_validation import LoanApplication
 from pydantic import ValidationError
 
