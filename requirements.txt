@@ -15,4 +15,7 @@ fastapi
 typing-extensions
 fastapi[all]
 jinja2
+math
+re
+gunicorn
 -e .
