@@ -161,7 +161,10 @@
             <label>Employed Days: <input type="number" name="Employed_Days" value="{{ form_data.get('Employed_Days', 5000) }}" required></label>
             <label>Registration Days: <input type="number" name="Registration_Days" value="{{ form_data.get('Registration_Days', 3000) }}" required></label>
             <label>ID Days: <input type="number" name="ID_Days" value="{{ form_data.get('ID_Days', 2000) }}" required></label>
-            <label>Own House Age: <input type="number" name="Own_House_Age" value="{{ form_data.get('Own_House_Age', '') }}"></label>
+            <label>Own House Age:
+                <input type="number" name="Own_House_Age" value="{{ form_data.get('Own_House_Age', '2') }}" required>
+            </label>
+              
             <label>Mobile Tag:
                 <select name="Mobile_Tag">
                     <option value="0" {% if form_data.get('Mobile_Tag', '0') == '0' %}selected{% endif %}>No</option>

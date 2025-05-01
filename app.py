@@ -172,6 +172,7 @@
 import pickle
 from flask import Flask, render_template, request, jsonify
 #import numpy as np
+from data_preprocessing import FullLoanPreprocessor
 import pandas as pd
 from data_validation import LoanApplication
 from pydantic import ValidationError
@@ -190,14 +191,28 @@ def home():
 def predict():
     raw_data = request.form.to_dict()
 
-    for key in raw_data:
+    # for key in raw_data:
+    #     try:
+    #         if '.' in raw_data[key]:
+    #             raw_data[key] = round(float(raw_data[key]), 6)
+    #         else:
+    #             raw_data[key] = int(raw_data[key])
+    #     except ValueError:
+    #         pass  # Leave as string if not a number
+    # Convert input values to appropriate types or None
+    for key, value in raw_data.items():
+        value = value.strip()
+        if value == "":
+            raw_data[key] = None  # Explicitly set empty fields to None
+            continue
         try:
-            if '.' in raw_data[key]:
-                raw_data[key] = round(float(raw_data[key]), 6)
+            # Convert numeric fields correctly
+            if '.' in value:
+                raw_data[key] = float(value)
             else:
-                raw_data[key] = int(raw_data[key])
+                raw_data[key] = int(value)
         except ValueError:
-            pass  # Leave as string if not a number
+            raw_data[key] = value  # Keep strings as is
 
     try:
         validated_data = LoanApplication(**raw_data).model_dump()

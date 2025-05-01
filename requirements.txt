@@ -6,3 +6,4 @@ catboost
 pydantic
 jinja2
 gunicorn
+cloudpickle
