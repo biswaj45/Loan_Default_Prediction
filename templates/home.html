@@ -1,37 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Loan Application</title>
+    <meta charset="UTF-8">
+    <title>Loan Default Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, select {
+            margin-bottom: 10px;
+            display: block;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .prediction {
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Loan Application Form</h2>
-    <form action="/submit" method="post">
-        <label>Client Income: <input type="number" name="Client_Income" step="0.01" required></label><br>
-        
-        <label>Car Owned:
-            <select name="Car_Owned">
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-            </select>
-        </label><br>
+    <h2>Loan Default Prediction Form</h2>
+    <form action="/predict" method="POST">
+        <label for="ID">ID:</label>
+        <input type="number" name="ID" value="111" required>
 
-        <label>Bike Owned:
-            <select name="Bike_Owned">
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-            </select>
-        </label><br>
+        <label for="Accompany_Client">Accompany Client:</label>
+        <select name="Accompany_Client" required>
+            <option value="Alone" selected>Alone</option>
+            <option value="Family">Family</option>
+            <option value="Partner">Partner</option>
+        </select>
 
-        <label>Client Gender:
-            <select name="Client_Gender">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
-        </label><br>
+        <label for="Active_Loan">Active Loan:</label>
+        <input type="number" name="Active_Loan" value="0" required>
 
-        <!-- Add more fields similarly -->
+        <label for="Age_Days">Age (in days):</label>
+        <input type="number" name="Age_Days" value="1123" required>
 
-        <input type="submit" value="Submit">
+        <label for="Application_Process_Day">Application Process Day:</label>
+        <input type="number" name="Application_Process_Day" value="0" required>
+
+        <label for="Application_Process_Hour">Application Process Hour:</label>
+        <input type="number" name="Application_Process_Hour" value="2" required>
+
+        <label for="Bike_Owned">Bike Owned:</label>
+        <input type="number" name="Bike_Owned" value="0" required>
+
+        <label for="Car_Owned">Car Owned:</label>
+        <input type="number" name="Car_Owned" value="0" required>
+
+        <label for="Child_Count">Child Count:</label>
+        <input type="number" name="Child_Count" value="2" required>
+
+        <label for="Client_City_Rating">Client City Rating:</label>
+        <input type="number" name="Client_City_Rating" value="1" required>
+
+        <label for="Client_Contact_Work_Tag">Client Contact Work Tag:</label>
+        <select name="Client_Contact_Work_Tag" required>
+            <option value="Yes" selected>Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="Client_Education">Client Education:</label>
+        <select name="Client_Education" required>
+            <option value="Secondary" selected>Secondary</option>
+            <option value="Higher">Higher</option>
+            <option value="Primary">Primary</option>
+        </select>
+
+        <label for="Client_Family_Members">Client Family Members:</label>
+        <input type="number" name="Client_Family_Members" value="2" required>
+
+        <label for="Client_Gender">Client Gender:</label>
+        <select name="Client_Gender" required>
+            <option value="Male" selected>Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="Client_Housing_Type">Client Housing Type:</label>
+        <select name="Client_Housing_Type" required>
+            <option value="Home" selected>Home</option>
+            <option value="Rent">Rent</option>
+            <option value="With Parents">With Parents</option>
+        </select>
+
+        <label for="Client_Income">Client Income:</label>
+        <input type="number" step="0.000001" name="Client_Income" value="1123" required>
+
+        <label for="Client_Income_Type">Client Income Type:</label>
+        <select name="Client_Income_Type" required>
+            <option value="Commercial" selected>Commercial</option>
+            <option value="Pensioner">Pensioner</option>
+            <option value="State servant">State servant</option>
+        </select>
+
+        <label for="Client_Marital_Status">Client Marital Status:</label>
+        <select name="Client_Marital_Status" required>
+            <option value="D" selected>Divorced</option>
+            <option value="M">Married</option>
+            <option value="S">Single</option>
+        </select>
+
+        <label for="Client_Occupation">Client Occupation:</label>
+        <select name="Client_Occupation" required>
+            <option value="Laborers" selected>Laborers</option>
+            <option value="Managers">Managers</option>
+            <option value="Sales">Sales</option>
+        </select>
+
+        <label for="Client_Permanent_Match_Tag">Client Permanent Match Tag:</label>
+        <select name="Client_Permanent_Match_Tag" required>
+            <option value="Yes" selected>Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="Credit_Amount">Credit Amount:</label>
+        <input type="number" step="0.000001" name="Credit_Amount" value="1213" required>
+
+        <label for="Credit_Bureau">Credit Bureau:</label>
+        <input type="number" name="Credit_Bureau" value="1" required>
+
+        <label for="Employed_Days">Employed Days:</label>
+        <input type="number" name="Employed_Days" value="110" required>
+
+        <label for="Homephone_Tag">Homephone Tag:</label>
+        <input type="number" name="Homephone_Tag" value="0" required>
+
+        <label for="House_Own">House Own:</label>
+        <input type="number" name="House_Own" value="0" required>
+
+        <label for="ID_Days">ID Days:</label>
+        <input type="number" name="ID_Days" value="12" required>
+
+        <label for="Loan_Annuity">Loan Annuity:</label>
+        <input type="number" step="0.000001" name="Loan_Annuity" value="111" required>
+
+        <label for="Loan_Contract_Type">Loan Contract Type:</label>
+        <select name="Loan_Contract_Type" required>
+            <option value="CL" selected>CL</option>
+            <option value="CR">CR</option>
+        </select>
+
+        <label for="Mobile_Tag">Mobile Tag:</label>
+        <input type="number" name="Mobile_Tag" value="0" required>
+
+        <label for="Own_House_Age">Own House Age:</label>
+        <input type="number" name="Own_House_Age" value="2" required>
+
+        <label for="Phone_Change">Phone Change:</label>
+        <input type="number" name="Phone_Change" value="5" required>
+
+        <label for="Population_Region_Relative">Population Region Relative:</label>
+        <input type="number" step="0.000001" name="Population_Region_Relative" value="0.3244" required>
+
+        <label for="Registration_Days">Registration Days:</label>
+        <input type="number" name="Registration_Days" value="90" required>
+
+        <label for="Score_Source_1">Score Source 1:</label>
+        <input type="number" step="0.000001" name="Score_Source_1" value="0.234" required>
+
+        <label for="Score_Source_2">Score Source 2:</label>
+        <input type="number" step="0.000001" name="Score_Source_2" value="0.11" required>
+
+        <label for="Score_Source_3">Score Source 3:</label>
+        <input type="number" step="0.000001" name="Score_Source_3" value="0.6545" required>
+
+        <label for="Social_Circle_Default">Social Circle Default:</label>
+        <input type="number" step="0.000001" name="Social_Circle_Default" value="0.234" required>
+
+        <label for="Type_Organization">Type Organization:</label>
+        <select name="Type_Organization" required>
+            <option value="Business Entity Type 3" selected>Business Entity Type 3</option>
+            <option value="Business Entity Type 1">Business Entity Type 1</option>
+            <option value="Business Entity Type 2">Business Entity Type 2</option>
+        </select>
+
+        <label for="Workphone_Working">Workphone Working:</label>
+        <input type="number" name="Workphone_Working" value="0" required>
+
+        <button type="submit">Submit</button>
     </form>
+
+    {% if prediction_text %}
+        <div class="prediction">{{ prediction_text }}</div>
+    {% endif %}
+
+    {% if error %}
+        <div class="error">
+            <p><strong>Validation Errors:</strong></p>
+            <ul>
+            {% for err in error %}
+                <li>{{ err['loc'][0] }}: {{ err['msg'] }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 </body>
 </html>
