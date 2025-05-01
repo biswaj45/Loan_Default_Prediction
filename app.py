@@ -190,6 +190,7 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     raw_data = request.form.to_dict()
+    print("Received form data:", raw_data)
 
     # for key in raw_data:
     #     try:
