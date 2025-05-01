@@ -211,7 +211,7 @@ class FullLoanPreprocessor:
             'Active_Loan', 'Accompany_Client', 'Client_Income_Type', 'Client_Education',
             'Client_Marital_Status', 'Loan_Contract_Type', 'Client_Housing_Type',
             'Registration_Years_Category', 'ID_Years_Category', 'Employed_Days_Category',
-            'Age_Days_Category', 'House_Own', 'Client_Occupation', 'Client_City_Rating',
+            'Age_Days_Category', 'House_Own', 'Client_Occupation', 'Cleint_City_Rating',
             'Application_Process_Day', 'Application_Hour_Category', 'Type_Organization_Grouped',
             'Score_Source_2', 'Score_Source_3', 'Social_Circle_Default', 'Phone_Change_category',
             'Credit_Bureau_Category'

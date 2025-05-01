@@ -119,7 +119,7 @@ from pydantic import ValidationError
 app = Flask(__name__)
 catboost_model = pickle.load(open('catboost_model_version_1.pkl', 'rb'))
 scalar = pickle.load(open('data_scaling_latest.pkl', 'rb'))
-preprocessor = pickle.load(open('data_preprocessing.pkl', 'rb'))
+preprocessor = pickle.load(open('data_preprocessing_v3.pkl', 'rb'))
 
 @app.route('/')
 def home():

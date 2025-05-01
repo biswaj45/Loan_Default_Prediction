@@ -32,7 +32,7 @@ class LoanApplication(BaseModel):
                                 'Waiters/barmen', 'Low-skill Laborers', 'Medicine', 'Cooking',
                                 'Private service', 'Security', 'IT', 'Secretaries']
     Client_Family_Members: int
-    Client_City_Rating: Literal[1, 2, 3]
+    Cleint_City_Rating: Literal[1, 2, 3]
     Application_Process_Day: Literal[0, 1, 2, 3, 4, 5, 6]
     Application_Process_Hour: Literal[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                                 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
