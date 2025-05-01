@@ -1,19 +1,8 @@
+Flask
 pandas
 numpy
 scikit-learn
-matplotlib
-seaborn
-scipy
 catboost
-xgboost
-lightgbm
-imbalanced-learn
-joblib
-Flask
 pydantic
-fastapi
-typing-extensions
-fastapi[all]
 jinja2
 gunicorn
--e .
