@@ -1,156 +1,81 @@
-Loan Default Prediction
-🚀 Overview
-This project aims to predict the likelihood of a borrower defaulting on a loan using a machine learning model. Financial institutions face substantial risk from defaulted loans, which can result in losses and damage credibility. This solution leverages the power of CatBoost, an advanced gradient boosting algorithm, to deliver high-performance predictions, along with a modern DevOps pipeline for seamless deployment.
+# Loan Default Prediction 🚀
 
-🔗 Live Demo: Loan Default Prediction Form
+## 📌 Overview
 
-🧠 Problem Statement
-Title: Loan Default Prediction and Evaluation Criteria
+This project aims to predict the likelihood of a borrower defaulting on a loan using a machine learning model.  
+It uses a **CatBoostClassifier**, modern web stack with **Flask**, and DevOps tools like **Docker** and **GitHub Actions** for CI/CD.
 
-Financial institutions struggle with accurately identifying borrowers likely to default. Traditional methods like credit scores or income-based assessments fail to capture the complexity of the underlying data. This project aims to develop a robust machine learning model that accounts for a wide range of borrower attributes and relationships, providing an accurate prediction of loan defaults.
+🔗 [**Live Demo Form**](https://loan-default-prediction-jit-3b7d62d99e52.herokuapp.com/)
 
-📊 Dataset Description
-The dataset contains various features related to clients applying for loans. The target variable is Default (1 = defaulted, 0 = not defaulted).
+---
 
-Key Features
-Column Name	Description
-Client_Income	Client Income in $
-Car_Owned, Bike_Owned	0 = No, 1 = Yes
-Active_Loan, House_Own	0 = No, 1 = Yes
-Child_Count	Number of children
-Credit_Amount	Credit amount of the loan
-Loan_Annuity	Loan annuity in $
-Accompany_Client	Companion when applying
-Client_Income_Type, Client_Education, Client_Marital_Status, Client_Gender, Client_Housing_Type, Type_Organization, Client_Occupation	Categorical variables
-Loan_Contract_Type	Type of loan (Cash or Revolving)
-Population_Region_Relative	Region's relative population
-Age_Days, Employed_Days, Registration_Days, ID_Days, Phone_Change, Own_House_Age	Time-based features
-Mobile_Tag, Homephone_Tag, Workphone_Working	0 = No, 1 = Yes
-Client_Family_Members	Family size
-Cleint_City_Rating	3 = best, 2 = good, 1 = average
-Application_Process_Day, Application_Process_Hour	Temporal application info
-Client_Permanent_Match_Tag, Client_Contact_Work_Tag	Address match indicators
-Score_Source_1/2/3	Normalized external scores
-Social_Circle_Default	# of defaults among contacts
-Credit_Bureau	Inquiries in last year
-Default	Target variable (1 = Default)
+## 🧠 Problem Statement
 
-🧰 Tech Stack
-Machine Learning: CatBoost
+Financial institutions face risks from loan defaults. Traditional assessments (credit score, income) fail to capture complex borrower patterns.  
+This project builds a robust machine learning solution using advanced preprocessing and model evaluation techniques.
 
-Framework: Flask
+---
 
-Validation: Pydantic
+## 📊 Dataset Description
 
-Deployment: Heroku
+The dataset contains borrower attributes.  
+The target variable is `Default` (`1 = defaulted`, `0 = not defaulted`).
 
-Containerization: Docker
+| Column                    | Description                                                |
+|---------------------------|------------------------------------------------------------|
+| Client_Income             | Client income in $                                          |
+| Car_Owned, Bike_Owned     | 0 = No, 1 = Yes                                             |
+| Active_Loan, House_Own    | 0 = No, 1 = Yes                                             |
+| Credit_Amount             | Credit amount of the loan                                  |
+| Age_Days, Employed_Days   | Time-based features                                        |
+| Loan_Contract_Type        | CL = Cash Loan, RL = Revolving Loan                        |
+| Application_Process_Hour  | Hour of day client applied                                 |
+| Social_Circle_Default     | # of contacts who defaulted                                |
+| ...                       | And many more as described in the data dictionary...       |
 
-CI/CD: GitHub Actions
+---
 
-🔧 Features
-End-to-end loan default prediction web app
+## 🧰 Tech Stack
 
-User input form with client features (Bootstrap styled)
+- **Machine Learning**: CatBoost
+- **Backend**: Flask
+- **Validation**: Pydantic
+- **CI/CD**: GitHub Actions
+- **Containerization**: Docker
+- **Deployment**: Heroku
 
-Automatic prediction of default status
+---
 
-CI/CD pipeline with Docker and GitHub Actions
+## 🧪 Model Pipeline
 
-RESTful API endpoint for model inference
+### 🔧 Preprocessing
+- Missing value imputation
+- One-hot & label encoding
+- Outlier handling
+- Feature scaling (StandardScaler)
 
-Handles missing data, outliers, and class imbalance
+### 🧠 Modeling
+- Model: `CatBoostClassifier`
+- Class imbalance handled via `class_weights`
+- Hyperparameter tuning via `GridSearchCV`
 
-🧪 Model Pipeline
-Data Preprocessing
+### 📈 Evaluation
+- Accuracy
+- Precision / Recall / F1
+- ROC-AUC
+- Confusion Matrix
 
-Missing value handling
+---
 
-Outlier detection
+## 🌐 Deployment
 
-Label encoding and one-hot encoding
+Deployed via Docker and GitHub Actions to Heroku.
 
-Feature scaling (if needed)
+### 🔄 Run Locally
 
-Modeling
-
-Algorithm: CatBoostClassifier
-
-Class imbalance handled via class weights
-
-Hyperparameter tuning using cross-validation
-
-Evaluation Metrics
-
-Accuracy
-
-Precision, Recall, F1 Score
-
-ROC-AUC Curve
-
-Confusion Matrix
-
-🌐 Deployment
-The app is deployed on Heroku and containerized using Docker for portability.
-
-Steps:
-Clone repo:
-
-bash
-Copy
-Edit
+```bash
 git clone https://github.com/yourusername/loan-default-prediction.git
 cd loan-default-prediction
-Build Docker image:
-
-bash
-Copy
-Edit
 docker build -t loan-default-app .
-Run locally:
-
-bash
-Copy
-Edit
 docker run -p 5000:5000 loan-default-app
-Access at http://localhost:5000
-
-CI/CD:
-
-GitHub Actions triggered on push to main
-
-Auto-deploys to Heroku via container registry
-
-📂 Project Structure
-bash
-Copy
-Edit
-.
-├── app/
-│   ├── main.py                # Flask app
-│   ├── model/
-│   │   ├── catboost_model.cbm # Trained model
-│   │   └── preprocessor.pkl   # Preprocessing pipeline
-│   └── templates/
-│       └── index.html         # Bootstrap form
-├── Dockerfile
-├── requirements.txt
-├── .github/workflows/
-│   └── ci-cd.yml              # GitHub Actions workflow
-├── README.md
-└── Procfile                  # For Heroku
-📈 Future Improvements
-Use SHAP for model interpretability
-
-Incorporate time series behavior
-
-Add admin dashboard to monitor predictions
-
-Integrate with a database for storing user inputs
-
-🤝 Contributing
-Contributions are welcome! Please fork the repo, create a branch, and open a pull request.
-
-📜 License
-This project is licensed under the MIT License.
-
+# Visit http://localhost:5000
